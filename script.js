@@ -9,20 +9,37 @@ const btnPausarIniciar = document.querySelector('.app__card-primary-button');
 const duracaoFoco = 1500;
 const duracaoDescansoCurto = 300;
 const duracaoDescansoLongo = 900;
+const botoes = document.querySelectorAll('.app__card-button');
+const musicaFoco = document.querySelector('#alternar-musica');
+const musica = new Audio('/sons/luna-rise-part-one.mp3');
 
+musica.loop = true;
+musicaFoco.addEventListener('change',()=>{
+    if (musica.paused){
+        musica.play();
+    }else{
+        musica.pause();
+    }
+})
 btnFoco.addEventListener('click',()=>{
     alterarEstiloPadrao('foco');
+    btnFoco.classList.add('active');
 })
 
 btnDescansoCurto.addEventListener('click',()=>{
     alterarEstiloPadrao('descanso-curto');
+    btnDescansoCurto.classList.add('active');
 })
 
 btnDescansoLongo.addEventListener('click',()=>{
     alterarEstiloPadrao('descanso-longo');
+    btnDescansoLongo.classList.add('active');
 })
 
 function alterarEstiloPadrao(btnChave){
+    botoes.forEach(function (contexto){
+        contexto.classList.remove('active');
+    })
     html.setAttribute('data-contexto',btnChave);
     imagemBanner.setAttribute('src',`./imagens/${btnChave}.png`);
     switch (btnChave){
