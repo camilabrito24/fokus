@@ -12,6 +12,8 @@ const btnPausarIniciar = document.querySelector('#start-pause');
 const musicaPause = new Audio('/sons/pause.mp3');
 const musicaStart = new Audio('/sons/play.wav');
 const musicaFinalTempo = new Audio('/sons/beep.mp3');
+const iniciarOuPausarBtn = document.querySelector('#start-pause span');
+const imgIniciarOuPausar = document.querySelector('.app__card-primary-butto-icon');
 const duracaoFoco = 1500;
 const duracaoDescansoCurto = 300;
 const duracaoDescansoLongo = 900;
@@ -72,12 +74,12 @@ function alterarEstiloPadrao(btnChave){
 
 const contagemRegressiva = () =>{
     if(tempoEmSegundos <= 0){
-        zerar();
         musicaFinalTempo.play();
         const alertaFinalTempo = confirm('Tempo Finalizado!');
         if (alertaFinalTempo){
             musicaFinalTempo.pause();
         }
+        zerar();
         return
     }
     tempoEmSegundos -= 1
@@ -94,9 +96,13 @@ function iniciarOuPausar(){
     }
     musicaStart.play();
     intervaloID = setInterval(contagemRegressiva,1000);
+    iniciarOuPausarBtn.textContent = "Pausar";
+    imgIniciarOuPausar.setAttribute('src',`./imagens/pause.png`);
 }
 
 function zerar(){
     clearInterval(intervaloID);
+    iniciarOuPausarBtn.textContent = "Começar";
+    imgIniciarOuPausar.setAttribute('src',`./imagens/play_arrow.png`);
     intervaloID = null;
 }
