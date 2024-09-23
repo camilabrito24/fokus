@@ -15,7 +15,7 @@ const musicaFinalTempo = new Audio('/sons/beep.mp3');
 const iniciarOuPausarBtn = document.querySelector('#start-pause span');
 const imgIniciarOuPausar = document.querySelector('.app__card-primary-butto-icon');
 const tempoNaTela = document.querySelector('#timer');
-let tempoEmSegundos = 1500;
+let tempoEmSegundos = 10;
 let intervaloID = null;
 
 musica.loop = true;
@@ -78,6 +78,11 @@ const contagemRegressiva = () =>{
     if(tempoEmSegundos <= 0){
         musicaFinalTempo.play();
         const alertaFinalTempo = confirm('Tempo Finalizado!');
+        const focoAtivo = html.getAttribute('data-contexto') == 'foco';
+        if (focoAtivo){
+            const evento = new CustomEvent('FocoFinalizado');
+            document.dispatchEvent(evento);
+        }
         if (alertaFinalTempo){
             musicaFinalTempo.pause();
         }
