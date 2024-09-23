@@ -15,7 +15,7 @@ const musicaFinalTempo = new Audio('/sons/beep.mp3');
 const iniciarOuPausarBtn = document.querySelector('#start-pause span');
 const imgIniciarOuPausar = document.querySelector('.app__card-primary-butto-icon');
 const tempoNaTela = document.querySelector('#timer');
-let tempoEmSegundos = 10;
+let tempoEmSegundos = 1500;
 let intervaloID = null;
 
 musica.loop = true;
